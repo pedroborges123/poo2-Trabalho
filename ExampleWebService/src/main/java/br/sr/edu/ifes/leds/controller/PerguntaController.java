@@ -48,18 +48,18 @@ public class PerguntaController extends AbstractController {
 		// Adicionando uma Pergunta
 		@RequestMapping(value = "/add", method = RequestMethod.POST)
 		@ResponseBody
-		public ResponseEntity<String> add(@RequestBody String valor, Nivel nivel) {
+		public ResponseEntity<Long> add(@RequestBody String valor, Nivel nivel) {
 			try {
 					Pergunta pergunta = new Pergunta(); 
 					pergunta = service.cadastrar(valor,nivel);
 					
-					return new ResponseEntity<String>(pergunta.getId().toString(),
+					return new ResponseEntity<Long>(pergunta.getId(),
 							HttpStatus.OK);
 				
 
 			} catch (Exception e) {
 				e.printStackTrace();
-				return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		}
 		
