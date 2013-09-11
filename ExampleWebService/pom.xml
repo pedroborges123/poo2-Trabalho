@@ -77,7 +77,7 @@
 
 		<!-- Spring dependencies -->
 
-		<dependency>
+	<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>
@@ -168,7 +168,6 @@
 		<!-- Log -->
 
 
-		<!-- the slf4j commons-logging replacement -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
@@ -214,31 +213,6 @@
 
 	</dependencies>
 	<build>
-		<finalName>examplews</finalName>
-		<plugins>
-			<!-- Maven Tomcat Plugin -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.1</version>
-				<configuration>
-					<url>http://127.0.0.1:8080/manager</url>
-					<server>TomcatServer</server>
-					<path>/examplews</path>
-				</configuration>
-			</plugin>
-			<!-- Maven compiler plugin -->
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-		
-		
-		
+		<finalName>QuizD3</finalName>
 	</build>
 </project>
