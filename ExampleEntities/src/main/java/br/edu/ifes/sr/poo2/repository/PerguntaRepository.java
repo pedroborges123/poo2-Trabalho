@@ -12,12 +12,12 @@ import br.edu.ifes.sr.poo2.model.Pergunta;
 @Repository
 @Transactional
 public interface PerguntaRepository extends JpaRepository<Pergunta, Long> {
-	
-	Pergunta findByValor (String valor);
-	
-	Long countByNivel(Nivel nivel);
 
-	List<Pergunta> getRandom(long quantPerguntas);
-	
-	List<Pergunta> getAllByNivel(Nivel nivel);
+Pergunta findByValor (String valor);
+
+Long countByNivel(Nivel nivel);
+
+List<Pergunta> getRandom(long quantPerguntas);
+
+List<Pergunta> getAllByNivel(Nivel nivel);
 }

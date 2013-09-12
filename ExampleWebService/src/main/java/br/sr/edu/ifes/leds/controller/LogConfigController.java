@@ -16,43 +16,43 @@ import br.edu.ifes.sr.poo2.service.LogConfigService;
 @Controller
 @RequestMapping("/LogConfig")
 public class LogConfigController extends AbstractController {
-	
-	@Autowired
-	private LogConfigService service;
-	
-	
-	// Retornando um LogConfig;
-	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<LogConfig> get(@PathVariable Long id) {
-		try {
 
-			LogConfig logConfig = service.get(id);
+@Autowired
+private LogConfigService service;
 
-			return new ResponseEntity<LogConfig>(logConfig, HttpStatus.OK);
 
-		} catch (Exception e) {
-			return new ResponseEntity<LogConfig>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
+// Retornando um LogConfig;
+@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+@ResponseBody
+public ResponseEntity<LogConfig> get(@PathVariable Long id) {
+try {
 
-	// Adicionando um LogConfig
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<String> add(@RequestBody LogConfig logConfig ) {
-		try {
-				LogConfig logConfigController = new LogConfig(); 
-				logConfigController = service.cadastrar(logConfig.getGerenteId(), logConfig.getServicoId());
-				
-				return new ResponseEntity<String>(logConfigController.getId().toString(),
-						HttpStatus.OK);
-			
+LogConfig logConfig = service.get(id);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+return new ResponseEntity<LogConfig>(logConfig, HttpStatus.OK);
+
+} catch (Exception e) {
+return new ResponseEntity<LogConfig>(HttpStatus.INTERNAL_SERVER_ERROR);
+}
+}
+
+
+// Adicionando um LogConfig
+@RequestMapping(value = "/add", method = RequestMethod.POST)
+@ResponseBody
+public ResponseEntity<String> add(@RequestBody LogConfig logConfig ) {
+try {
+LogConfig logConfigController = new LogConfig();
+logConfigController = service.cadastrar(logConfig.getGerenteId(), logConfig.getServicoId());
+
+return new ResponseEntity<String>(logConfigController.getId().toString(),
+HttpStatus.OK);
+
+
+} catch (Exception e) {
+e.printStackTrace();
+return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+}
+}
 
 }

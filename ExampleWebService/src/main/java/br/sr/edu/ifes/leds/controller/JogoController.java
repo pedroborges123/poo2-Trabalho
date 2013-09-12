@@ -23,88 +23,82 @@ import br.edu.ifes.sr.poo2.service.ScoreService;
 @Controller
 @RequestMapping("/jogo")
 public class JogoController extends AbstractController {
-	
-	
-	@Autowired
-	private JogoService service;
-	
-	@Autowired
-	private ScoreService scoreService;
-	
-	@Autowired
-	private RespostaService respostaService;
-	
-	
-	// Retornando a quantidade de Jogos
-			@RequestMapping(value = "/count", method = RequestMethod.GET)
-			@ResponseBody
-			public ResponseEntity<Long> count() {
 
-				try {
-					
-					long count = service.count();
-				
-					return new ResponseEntity<Long>(count, HttpStatus.OK);
+    @Autowired
+    private JogoService service;
+    @Autowired
+    private ScoreService scoreService;
+    @Autowired
+    private RespostaService respostaService;
 
-				} catch (Exception e) {
-					return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
-				}
+// Retornando a quantidade de Jogos
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Long> count() {
 
-			}
+        try {
 
-			// Adicionando um Jogo
-			@RequestMapping(value = "/add", method = RequestMethod.POST)
-			@ResponseBody
-			public ResponseEntity<String> add(@RequestBody Jogador jogador, Nivel nivel) {
-				try {
-					
-						Jogo jogo = new Jogo(); 
-						jogo = service.cadastrar(jogador,nivel, 5);
-						
-						return new ResponseEntity<String>(jogo.getId().toString(),
-								HttpStatus.OK);
-					
+            long count = service.count();
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			}
+            return new ResponseEntity<Long>(count, HttpStatus.OK);
 
-			//	Finalizando um jogo
-			@RequestMapping(value = "/end", method = RequestMethod.POST)
-			@ResponseBody
-			public ResponseEntity<String> end(@RequestBody Jogo jogo, Jogador jogador, List<Resposta> lstResposta) {
-				try {
-					
-						int pontuacao = respostaService.getPontuacao(lstResposta);
-						 
-						scoreService.cadastrar(jogo.getId(), jogador.getId(),pontuacao);
-						
-						return new ResponseEntity<String>(Integer.toString(pontuacao),
-								HttpStatus.OK);
-					
+        } catch (Exception e) {
+            return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			}
-			
-			
-			// Retornando um Jogo;
-			@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-			@ResponseBody
-			public ResponseEntity<Jogo> get(@PathVariable Long id) {
-				try {
+    }
 
-					Jogo jogo = service.get(id);
+// Adicionando um Jogo
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> add(@RequestBody Jogador jogador, Nivel nivel) {
+        try {
 
-					return new ResponseEntity<Jogo>(jogo, HttpStatus.OK);
+            Jogo jogo = new Jogo();
+            jogo = service.cadastrar(jogador, nivel, 5);
 
-				} catch (Exception e) {
-					return new ResponseEntity<Jogo>(HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			}
+            return new ResponseEntity<String>(jogo.getId().toString(),
+                    HttpStatus.OK);
 
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+// Finalizando um jogo
+    @RequestMapping(value = "/end", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> end(@RequestBody Jogo jogo, Jogador jogador, List<Resposta> lstResposta) {
+        try {
+
+            int pontuacao = respostaService.getPontuacao(lstResposta);
+
+            scoreService.cadastrar(jogo.getId(), jogador.getId(), pontuacao);
+
+            return new ResponseEntity<String>(Integer.toString(pontuacao),
+                    HttpStatus.OK);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+// Retornando um Jogo;
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<Jogo> get(@PathVariable Long id) {
+        try {
+
+            Jogo jogo = service.get(id);
+
+            return new ResponseEntity<Jogo>(jogo, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<Jogo>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

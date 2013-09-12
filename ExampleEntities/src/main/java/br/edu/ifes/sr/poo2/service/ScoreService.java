@@ -8,41 +8,41 @@ import br.edu.ifes.sr.poo2.model.Score;
 import br.edu.ifes.sr.poo2.repository.ScoreRepository;
 
 
-public class ScoreService  implements CRUDService<Long, Score>{
-	
-	@Autowired
-	ScoreRepository scoreRepository;
-	
-	public void cadastrar (Long jogoId, Long jogadorId, int pontuacao) throws Exception
-	{	
-		Score score = new Score();
-		score.setJogoId(jogoId);
-		score.setJogadorId(jogadorId);
-		score.setPontuacao(pontuacao);
-		this.save(score);
-	}
-	
-	public void save(Score t) {
-		scoreRepository.save(t);
-		
-	}
+public class ScoreService implements CRUDService<Long, Score>{
 
-	public List<Score> getAll() {
-		return scoreRepository.findAll();
-	}
+@Autowired
+ScoreRepository scoreRepository;
 
-	public void delete(Long id) {
-		scoreRepository.delete(id);
-		
-	}
+public void cadastrar (Long jogoId, Long jogadorId, int pontuacao) throws Exception
+{	
+Score score = new Score();
+score.setJogoId(jogoId);
+score.setJogadorId(jogadorId);
+score.setPontuacao(pontuacao);
+this.save(score);
+}
 
-	public Score get(Long id){
-		Score score = scoreRepository.findOne(id);
-		return score;
-	}
+public void save(Score t) {
+scoreRepository.save(t);
 
-	public long count() {
-		return scoreRepository.count();
-	}
+}
+
+public List<Score> getAll() {
+return scoreRepository.findAll();
+}
+
+public void delete(Long id) {
+scoreRepository.delete(id);
+
+}
+
+public Score get(Long id){
+Score score = scoreRepository.findOne(id);
+return score;
+}
+
+public long count() {
+return scoreRepository.count();
+}
 
 }

@@ -4,41 +4,40 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class Jogador extends Model{
-	
-	private static final long serialVersionUID = 1L;
+public class Jogador extends Model {
 
-	@Column
-	private String email;
-	
-	@Column
-	private String senha;
-	
-	@Column
-	private String username;
-	
-	public String getEmail() {
-		return email;
-	}
+    private static final long serialVersionUID = 1L;
+    @Column
+    private String email;
+    @Column
+    private String senha;
+    @Column
+    private String username;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Jogador() {
+    }
 }

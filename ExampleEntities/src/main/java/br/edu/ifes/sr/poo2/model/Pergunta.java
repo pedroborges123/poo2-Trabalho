@@ -1,53 +1,64 @@
 package br.edu.ifes.sr.poo2.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Pergunta extends Model {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-    
-    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
-    private List<Resposta> respostas = new ArrayList<Resposta>();
-    
-    @Column
-    private String valor;
-    
-    @OneToOne
-    public Nivel nivel;
+/**
+*
+*/
+private static final long serialVersionUID = 1L;
 
-    public Nivel getNivel() {
-        return nivel;
-    }
+@Column
+private String valor;
 
-    public void setNivel(Nivel nivel) {
-        this.nivel = nivel;
-    }
+@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+private Set<Resposta> respostas = new HashSet<Resposta>();
 
-    public List<Resposta> getRespostas() {
-        return respostas;
-    }
+@Column
+private Nivel nivel;
 
-    public void setRespostas(List<Resposta> respostas) {
-        this.respostas = respostas;
-    }
+public Nivel getNivel() {
+return nivel;
+}
 
-    public String getValor() {
-        return valor;
-    }
+public void setNivel(Nivel nivel) {
+this.nivel = nivel;
+}
 
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
+public String getValor() {
+return valor;
+}
+
+public void setValor(String valor) {
+this.valor = valor;
+}
+
+public Set<Resposta> getRespostas() {
+return respostas;
+}
+
+public void setRespostas(Set<Resposta> respotas) {
+this.respostas = respotas;
+}
+
+
+public Resposta getResposta() {
+return (Resposta) respostas.iterator();
+}
+
+public void addResposta(Resposta r){
+this.respostas.add((Resposta) r);
+}
+
+
+
 }

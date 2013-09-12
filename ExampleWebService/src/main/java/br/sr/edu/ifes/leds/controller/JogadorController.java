@@ -17,58 +17,58 @@ import br.edu.ifes.sr.poo2.service.JogadorService;;
 @RequestMapping("/jogador")
 public class JogadorController extends AbstractController {
 
-	@Autowired
-	private JogadorService service;
+@Autowired
+private JogadorService service;
 
-	// Retornando a quantidade de jogadores
-	@RequestMapping(value = "/count", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<Long> count() {
+// Retornando a quantidade de jogadores
+@RequestMapping(value = "/count", method = RequestMethod.GET)
+@ResponseBody
+public ResponseEntity<Long> count() {
 
-		try {
-			
-			long count = service.count();
-		
-			return new ResponseEntity<Long>(count, HttpStatus.OK);
+try {
 
-		} catch (Exception e) {
-			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+long count = service.count();
 
-	}
+return new ResponseEntity<Long>(count, HttpStatus.OK);
 
-	// Adicionando um jogador
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseEntity<String> add(@RequestBody String email, String senha, String username) {
-		try {
-				Jogador jogador = new Jogador(); 
-				jogador = service.cadastrar(email, senha, username);
-				
-				return new ResponseEntity<String>(jogador.getId().toString(),
-						HttpStatus.OK);
-			
+} catch (Exception e) {
+return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+}
 
-		
-	// Retornando um jogador;
-	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<Jogador> get(@PathVariable Long id) {
-		try {
+// Adicionando um jogador
+@RequestMapping(value = "/add", method = RequestMethod.POST)
+@ResponseBody
+public ResponseEntity<String> add(@RequestBody String email, String senha, String username) {
+try {
+Jogador jogador = new Jogador();
+jogador = service.cadastrar(email, senha, username);
 
-			Jogador jogador = service.get(id);
+return new ResponseEntity<String>(jogador.getId().toString(),
+HttpStatus.OK);
 
-			return new ResponseEntity<Jogador>(jogador, HttpStatus.OK);
 
-		} catch (Exception e) {
-			return new ResponseEntity<Jogador>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+} catch (Exception e) {
+e.printStackTrace();
+return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+}
+}
+
+
+// Retornando um jogador;
+@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+@ResponseBody
+public ResponseEntity<Jogador> get(@PathVariable Long id) {
+try {
+
+Jogador jogador = service.get(id);
+
+return new ResponseEntity<Jogador>(jogador, HttpStatus.OK);
+
+} catch (Exception e) {
+return new ResponseEntity<Jogador>(HttpStatus.INTERNAL_SERVER_ERROR);
+}
+}
 
 }

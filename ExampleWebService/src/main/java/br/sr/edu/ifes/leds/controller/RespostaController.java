@@ -16,60 +16,60 @@ import br.edu.ifes.sr.poo2.service.RespostaService;
 @Controller
 @RequestMapping("/resposta")
 public class RespostaController extends AbstractController {
-	
+
 	@Autowired
 	private RespostaService service;
-	
-	
+
 	// Retornando a quantidade de Resposta
-			@RequestMapping(value = "/count", method = RequestMethod.GET)
-			@ResponseBody
-			public ResponseEntity<Long> count() {
+	@RequestMapping(value = "/count", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Long> count() {
 
-				try {
-					
-					long count = service.count();
-				
-					return new ResponseEntity<Long>(count, HttpStatus.OK);
+		try {
 
-				} catch (Exception e) {
-					return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
-				}
+			long count = service.count();
 
-			}
+			return new ResponseEntity<Long>(count, HttpStatus.OK);
 
-			// Adicionando uma Resposta
-			@RequestMapping(value = "/add", method = RequestMethod.POST)
-			@ResponseBody
-			public ResponseEntity<String> add(@RequestBody String valor, Boolean isRight, Long perguntaId) {
-				try {
-						Resposta resposta = new Resposta(); 
-						resposta = service.cadastrar(valor,isRight, perguntaId);
-						
-						return new ResponseEntity<String>(resposta.getId().toString(),
-								HttpStatus.OK);
-					
+		} catch (Exception e) {
+			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
-				} catch (Exception e) {
-					e.printStackTrace();
-					return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			}
+	}
 
-			
-			// Retornando uma Resposta;
-			@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-			@ResponseBody
-			public ResponseEntity<Resposta> get(@PathVariable Long id) {
-				try {
+	// Adicionando uma Resposta
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> add(@RequestBody String valor,
+			Boolean isRight, Long perguntaId) {
+		try {
+			Resposta resposta = new Resposta();
+			resposta = service.cadastrar(valor, isRight, perguntaId);
 
-					Resposta resposta = service.get(id);
+			return new ResponseEntity<String>(resposta.getId().toString(),
+					HttpStatus.OK);
 
-					return new ResponseEntity<Resposta>(resposta, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
-				} catch (Exception e) {
-					return new ResponseEntity<Resposta>(HttpStatus.INTERNAL_SERVER_ERROR);
-				}
-			}
+	// Retornando uma Resposta;
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<Resposta> get(@PathVariable Long id) {
+		try {
+
+			Resposta resposta = service.get(id);
+
+			return new ResponseEntity<Resposta>(resposta, HttpStatus.OK);
+
+		} catch (Exception e) {
+			return new ResponseEntity<Resposta>(
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 }

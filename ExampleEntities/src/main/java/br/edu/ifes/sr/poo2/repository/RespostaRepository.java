@@ -11,11 +11,11 @@ import br.edu.ifes.sr.poo2.model.Resposta;;
 @Repository
 @Transactional
 public interface RespostaRepository extends JpaRepository<Resposta, Long> {
-	
-	Resposta findByValor (String valor);
-	
-	List<Resposta> findAllByPergunta (long perguntaId);
-	
-	int getPontuacao(List<Resposta> lstResposta);
-	
+
+Resposta findByValor (String valor);
+
+List<Resposta> findAllByPergunta (long perguntaId);
+
+int getPontuacao(List<Resposta> lstResposta);
+
 }
