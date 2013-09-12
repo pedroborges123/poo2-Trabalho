@@ -1,7 +1,5 @@
 package br.sr.edu.ifes.leds.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.edu.ifes.sr.poo2.model.Nivel;
 import br.edu.ifes.sr.poo2.model.Pergunta;
-import br.edu.ifes.sr.poo2.model.Resposta;
 import br.edu.ifes.sr.poo2.service.PerguntaService;
 import br.edu.ifes.sr.poo2.service.RespostaService;
 
@@ -48,10 +44,9 @@ public class PerguntaController extends AbstractController {
 		// Adicionando uma Pergunta
 		@RequestMapping(value = "/add", method = RequestMethod.POST)
 		@ResponseBody
-		public ResponseEntity<Long> add(@RequestBody String valor, Nivel nivel) {
+		public ResponseEntity<Long> add(@RequestBody Pergunta pergunta) {
 			try {
-					Pergunta pergunta = new Pergunta(); 
-					pergunta = service.cadastrar(valor,nivel);
+					pergunta = service.cadastrar(pergunta.getValor(),pergunta.getNivel(), pergunta.getRespostas());
 					
 					return new ResponseEntity<Long>(pergunta.getId(),
 							HttpStatus.OK);
@@ -63,27 +58,6 @@ public class PerguntaController extends AbstractController {
 			}
 		}
 		
-		// Adicionando Respostas a Pergunta
-		@RequestMapping(value = "/addResposta", method = RequestMethod.POST)
-		@ResponseBody
-		public ResponseEntity<String> addResposta(@RequestBody Long perguntaId) {
-			try {
-					Pergunta pergunta = new Pergunta(); 
-					pergunta = service.get(perguntaId);
-				
-					List<Resposta> lstResposta = respostaService.findAllByPergunta(perguntaId);
-					pergunta.setRespostas(lstResposta);
-							
-					return new ResponseEntity<String>(pergunta.getId().toString(),
-							HttpStatus.OK);
-				
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-		}
-
 		
 		// Retornando uma Pergunta;
 		@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)

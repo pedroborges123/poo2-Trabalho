@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.edu.ifes.sr.poo2.model.Nivel;
 import br.edu.ifes.sr.poo2.model.Pergunta;
+import br.edu.ifes.sr.poo2.model.Resposta;
 import br.edu.ifes.sr.poo2.repository.PerguntaRepository;
 
 @Service
@@ -25,7 +26,7 @@ public class PerguntaService implements CRUDService<Long, Pergunta> {
 	}
 	
 
-	public Pergunta cadastrar (String valor, Nivel nivel) throws Exception
+	public Pergunta cadastrar (String valor, Nivel nivel,List<Resposta> lstResposta) throws Exception
 	{
 		
 		if (!isPergunta(valor)){

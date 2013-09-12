@@ -2,8 +2,11 @@ package br.edu.ifes.sr.poo2.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -15,7 +18,7 @@ public class Pergunta extends Model {
      */
     private static final long serialVersionUID = 1L;
     
-    @OneToMany
+    @OneToMany(cascade= CascadeType.ALL,fetch= FetchType.EAGER)
     private List<Resposta> respostas = new ArrayList<Resposta>();
     
     @Column
